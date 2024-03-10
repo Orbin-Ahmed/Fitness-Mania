@@ -1,5 +1,5 @@
 # Fitness Mania Gym Website: A React TypeScript Project Designed With TailWind CSS
-This project is a React.js single-page application (SPA) built with TypeScript to create a user-friendly and interactive website for [Gym Name]. The focus is on providing a clean, well-structured, and type-safe codebase for managing your gym's online presence.
+This project is a React.js single-page application (SPA) built with TypeScript to create a user-friendly and interactive website for Fitness Mania. The focus is on providing a clean, well-structured, and type-safe codebase for managing your gym's online presence.
 
 ![fitnessMania](https://github.com/Orbin-Ahmed/Fitness-Mania/assets/93181928/e92f3495-35f6-4090-b7ff-3a635bcfd4d6)
 
