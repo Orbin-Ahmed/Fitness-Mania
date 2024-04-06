@@ -4,6 +4,7 @@ type InputFieldProps = {
   name: string;
   id: string;
   required: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const InputField = ({
@@ -12,6 +13,7 @@ const InputField = ({
   name,
   required,
   id,
+  onChange,
 }: InputFieldProps) => {
   const inputStyles = `mb-5 w-full rounded-lg bg-primary-300
   px-5 py-3 placeholder-white`;
@@ -25,6 +27,7 @@ const InputField = ({
         name={name}
         id={`#${id}`}
         required={required}
+        onChange={onChange}
       />
     </>
   );

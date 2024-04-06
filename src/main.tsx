@@ -4,8 +4,8 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "@/shared/ErrorPage.tsx";
-import Login from "@/Layouts/LandingPage/Auth/Login.tsx";
-import SignUp from "@/Layouts/LandingPage/Auth/SignUp.tsx";
+import Login from "@/Layouts/Auth/Login.tsx";
+import SignUp from "@/Layouts/Auth/SignUp.tsx";
 
 const router = createBrowserRouter([
   {
