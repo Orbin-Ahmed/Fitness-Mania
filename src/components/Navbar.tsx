@@ -3,9 +3,12 @@ import Logo from "@/assets/Logo.png";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Button from "./Button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import NavbarItem from "./NavbarItem";
 import { Link } from "react-router-dom";
+import { getSessionStorage } from "@/utils";
+import UserLoginButton from "./UserLoginButton";
+
 type navBarProps = {
   selectedPage: SelectedPage;
   isTopOfPage: boolean;
@@ -24,6 +27,12 @@ const Navbar = ({
   const flexBetween = "flex items-center justify-between";
   const isAboveMediumScreen = useMediaQuery("(min-width: 1060px)");
   const navBackgroundStyles = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
+  const [name, setName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedName = getSessionStorage("c_user");
+    setName(storedName !== null ? storedName : "");
+  }, []);
 
   useEffect(() => {
     if (isAboveMediumScreen) setIsMenuToggle(false);
@@ -44,14 +53,18 @@ const Navbar = ({
                   setSelectedPage={setSelectedPage}
                   isMenuToggle={isMenuToggle}
                 />
-                <div className={`${flexBetween} gap-8`}>
-                  <p>
-                    <Link to={"login/"}>Sign In</Link>
-                  </p>
-                  <Link to={"sign-up/"}>
-                    <Button>Become a Member</Button>
-                  </Link>
-                </div>
+                {!name ? (
+                  <div className={`${flexBetween} gap-8`}>
+                    <p>
+                      <Link to={"login/"}>Sign In</Link>
+                    </p>
+                    <Link to={"sign-up/"}>
+                      <Button>Become a Member</Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <UserLoginButton name={name} />
+                )}
               </div>
             ) : (
               <div>
@@ -81,9 +94,7 @@ const Navbar = ({
               setSelectedPage={setSelectedPage}
               isMenuToggle={isMenuToggle}
             />
-            <div
-              className={`${flexBetween} gap-8 absolute bottom-4 left-4 right-4`}
-            >
+            <div className={`${flexBetween} gap-8 p-4 mt-8`}>
               <p>
                 <Link to={"login/"}>Sign In</Link>
               </p>

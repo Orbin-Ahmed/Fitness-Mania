@@ -1,6 +1,7 @@
 import CryptoJS from "crypto-js";
 
-const secretKey = generateRandomBytes(32).toString();
+const secretKey =
+  "5c5079139eafb6db723fddea811861dc9295c5f3cad5f2e0b9ff3b954bcb21b5";
 
 const storeSessionStorage = (name: string, token: string) => {
   token = encryptData(token, secretKey);
@@ -40,13 +41,6 @@ function decryptData(encryptedData: string, secretKey: string): string {
 
   const plaintext = bytes.toString(CryptoJS.enc.Utf8);
   return plaintext;
-}
-
-// Generate Random Number
-function generateRandomBytes(size: number): CryptoJS.lib.WordArray {
-  const randomData = CryptoJS.lib.WordArray.random(size);
-  const words = randomData.words;
-  return CryptoJS.lib.WordArray.create(words);
 }
 
 export { storeSessionStorage, getSessionStorage, removeSessionStorage };
