@@ -81,6 +81,16 @@ const Navbar = ({
               setSelectedPage={setSelectedPage}
               isMenuToggle={isMenuToggle}
             />
+            <div
+              className={`${flexBetween} gap-8 absolute bottom-4 left-4 right-4`}
+            >
+              <p>
+                <Link to={"login/"}>Sign In</Link>
+              </p>
+              <p>
+                <Link to={"sign-up/"}>Register</Link>
+              </p>
+            </div>
           </div>
         </div>
       )}

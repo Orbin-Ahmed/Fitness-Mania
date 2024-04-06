@@ -4,7 +4,7 @@ type ButtonProps = {
   children: React.ReactNode;
   type?: "button" | "submit" | "reset";
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 function Button({
