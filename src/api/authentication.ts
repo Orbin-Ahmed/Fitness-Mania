@@ -1,4 +1,4 @@
-import { storeSessionStorage } from "@/utils";
+import { removeSessionStorage, storeSessionStorage } from "@/utils";
 
 type FormDataType = {
   username?: string;
@@ -28,6 +28,30 @@ export const userLogin = async (
     } else {
       const errorMessage = await response.json();
       return { error: errorMessage.message };
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+export const userLogout = async (token: string) => {
+  const url = "https://backend-fitness-mania.vercel.app/auth/logout";
+
+  try {
+    const response = await fetch(url, {
+      mode: "no-cors",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(token),
+    });
+    if (response.ok) {
+      await response.json();
+      removeSessionStorage("c_user");
+      removeSessionStorage("c_id");
+      removeSessionStorage("c_s");
+    } else {
+      const errorMessage = await response.json();
+      console.log(errorMessage);
     }
   } catch (error) {
     console.error("Error:", error);

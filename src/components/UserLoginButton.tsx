@@ -1,10 +1,15 @@
+import { UserGroupIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
+import logoutIcon from "@/assets/logout.png";
+import { Link } from "react-router-dom";
+import { userLogout } from "@/api/authentication";
 
 type UserLoginButtonProps = {
   name: string;
+  token: string | null;
 };
 
-const UserLoginButton = ({ name }: UserLoginButtonProps) => {
+const UserLoginButton = ({ name, token }: UserLoginButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -27,10 +32,15 @@ const UserLoginButton = ({ name }: UserLoginButtonProps) => {
     };
   }, []);
 
+  const logout = () => {
+    token = token !== null ? token : "";
+    userLogout(token);
+  };
+
   return (
     <div className="dropdown relative inline-block">
       <button
-        className="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none"
+        className="relative z-10 flex items-center p-2 text-base rounded-md focus:outline-none"
         onClick={toggleDropdown}
       >
         <span className="mx-1">{name}</span>
@@ -48,34 +58,46 @@ const UserLoginButton = ({ name }: UserLoginButtonProps) => {
       </button>
 
       <div
-        className={`absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 ${
+        className={`absolute right-0 z-20 w-56 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl ${
           isOpen ? "translate-y-0" : "translate-y-4 opacity-0"
         }`}
-        onMouseEnter={() => setIsOpen(true)} // Keep open on hover
         onMouseLeave={() => setIsOpen(false)}
       >
-        <a
-          href="#"
-          className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+        <Link
+          to="#"
+          className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat"
         >
           <img
             className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
             src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
-            alt="Jane Doe avatar"
+            alt={name}
           />
           <div className="mx-1">
-            <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-              {name}
-            </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              janedoe@exampl.com
-            </p>
+            <h1 className="text-sm text-gray-500">Profile</h1>
+          </div>
+        </Link>
+
+        <hr className="border-gray-200" />
+        <Link
+          to="#"
+          className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat"
+        >
+          <UserGroupIcon className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" />
+          <div className="mx-1">
+            <h1 className="text-sm text-gray-500">Your Classes</h1>
+          </div>
+        </Link>
+        <hr className="border-gray-200" />
+        <a className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat cursor-pointer">
+          <img
+            className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
+            src={logoutIcon}
+            alt="logout"
+          />
+          <div className="mx-1" onClick={logout}>
+            <h1 className="text-sm text-gray-500">Logout</h1>
           </div>
         </a>
-
-        <hr className="border-gray-200 dark:border-gray-700" />
-
-        {/* ... rest of the dropdown menu items */}
       </div>
     </div>
   );

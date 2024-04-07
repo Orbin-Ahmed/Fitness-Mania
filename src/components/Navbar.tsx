@@ -28,10 +28,13 @@ const Navbar = ({
   const isAboveMediumScreen = useMediaQuery("(min-width: 1060px)");
   const navBackgroundStyles = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
   const [name, setName] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const storedName = getSessionStorage("c_user");
     setName(storedName !== null ? storedName : "");
+    const storedToken = getSessionStorage("c_s");
+    setToken(storedToken !== null ? storedToken : "");
   }, []);
 
   useEffect(() => {
@@ -63,7 +66,7 @@ const Navbar = ({
                     </Link>
                   </div>
                 ) : (
-                  <UserLoginButton name={name} />
+                  <UserLoginButton name={name} token={token} />
                 )}
               </div>
             ) : (
