@@ -1,5 +1,5 @@
 import { UserGroupIcon } from "@heroicons/react/24/solid";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import logoutIcon from "@/assets/logout.png";
 import { Link } from "react-router-dom";
 import { userLogout } from "@/api/authentication";
@@ -15,22 +15,6 @@ const UserLoginButton = ({ name, token }: UserLoginButtonProps) => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      isOpen &&
-      !(event.target as HTMLElement).closest(".dropdown .dropdown-menu")
-    ) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const logout = () => {
     token = token !== null ? token : "";
@@ -63,6 +47,7 @@ const UserLoginButton = ({ name, token }: UserLoginButtonProps) => {
         }`}
         onMouseLeave={() => setIsOpen(false)}
       >
+        {/* Profile Area */}
         <Link
           to="#"
           className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat"
@@ -78,6 +63,8 @@ const UserLoginButton = ({ name, token }: UserLoginButtonProps) => {
         </Link>
 
         <hr className="border-gray-200" />
+
+        {/* Class Area */}
         <Link
           to="#"
           className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat"
@@ -88,13 +75,18 @@ const UserLoginButton = ({ name, token }: UserLoginButtonProps) => {
           </div>
         </Link>
         <hr className="border-gray-200" />
-        <a className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat cursor-pointer">
+
+        {/* Logout Area */}
+        <a
+          onClick={logout}
+          className="flex items-center p-3 -mt-2 text-sm transition-colors duration-300 transform hover:bg-gray-100 font-montserrat cursor-pointer"
+        >
           <img
             className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
             src={logoutIcon}
             alt="logout"
           />
-          <div className="mx-1" onClick={logout}>
+          <div className="mx-1">
             <h1 className="text-sm text-gray-500">Logout</h1>
           </div>
         </a>
