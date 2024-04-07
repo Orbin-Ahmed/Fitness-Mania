@@ -1,4 +1,5 @@
 import { removeSessionStorage, storeSessionStorage } from "@/utils";
+const baseUrl = process.env.BASE_URL;
 
 type FormDataType = {
   username?: string;
@@ -6,13 +7,11 @@ type FormDataType = {
   password: string;
 };
 
-export const userLogin = async (
+export const userLoginRegister = async (
   forgetPass: boolean,
   formData: FormDataType
 ) => {
-  const url = forgetPass
-    ? "https://backend-fitness-mania.vercel.app/auth/login"
-    : "https://backend-fitness-mania.vercel.app/auth/register";
+  const url = forgetPass ? `${baseUrl}auth/login` : `${baseUrl}auth/register`;
 
   try {
     const response = await fetch(url, {
@@ -35,23 +34,26 @@ export const userLogin = async (
 };
 
 export const userLogout = async (token: string) => {
-  const url = "https://backend-fitness-mania.vercel.app/auth/logout";
+  const url = `${baseUrl}auth/logout`;
+  const jsonBody = {
+    sessionToken: token,
+  };
 
   try {
     const response = await fetch(url, {
-      mode: "no-cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(token),
+      body: JSON.stringify(jsonBody),
     });
     if (response.ok) {
       await response.json();
       removeSessionStorage("c_user");
       removeSessionStorage("c_id");
       removeSessionStorage("c_s");
+      window.location.href = "/";
     } else {
       const errorMessage = await response.json();
-      console.log(errorMessage);
+      console.error(errorMessage);
     }
   } catch (error) {
     console.error("Error:", error);

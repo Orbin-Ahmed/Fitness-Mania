@@ -1,4 +1,4 @@
-import { userLogin } from "@/api/authentication";
+import { userLoginRegister } from "@/api/authentication";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import { HomeIcon } from "@heroicons/react/24/solid";
@@ -41,7 +41,7 @@ const AuthForm = ({
     event.preventDefault();
     setIsLoading(true);
     setError(null);
-    const data = await userLogin(forgetPass, formData);
+    const data = await userLoginRegister(forgetPass, formData);
 
     if (data?.error) {
       setError(data.error);
