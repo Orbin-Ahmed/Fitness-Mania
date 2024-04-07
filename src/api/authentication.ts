@@ -1,5 +1,5 @@
 import { removeSessionStorage, storeSessionStorage } from "@/utils";
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.API_URL;
 
 type FormDataType = {
   username?: string;
