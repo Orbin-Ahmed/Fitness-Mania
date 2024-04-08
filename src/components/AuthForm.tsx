@@ -45,8 +45,6 @@ const AuthForm = ({
 
     if (data?.error) {
       setError(data.error);
-    } else {
-      window.location.href = "/";
     }
 
     setIsLoading(false);

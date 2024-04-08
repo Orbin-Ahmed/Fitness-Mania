@@ -24,6 +24,7 @@ export const userLoginRegister = async (
       storeSessionStorage("c_user", data.username);
       storeSessionStorage("c_id", data.id);
       storeSessionStorage("c_s", data.sessionToken);
+      window.location.href = "/";
     } else {
       const errorMessage = await response.json();
       return { error: errorMessage.message };
