@@ -6,6 +6,7 @@ import Benifits from "@/Layouts/LandingPage/Benifits";
 import OurClasses from "@/Layouts/LandingPage/OurClasses";
 import ContactUs from "@/Layouts/LandingPage/ContactUs";
 import Footer from "@/Layouts/LandingPage/Footer";
+import Chatbot from "./components/ChatBot";
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -44,6 +45,7 @@ function App() {
         <Benifits setSelectedPage={setSelectedPage} />
         <OurClasses setSelectedPage={setSelectedPage} />
         <ContactUs setSelectedPage={setSelectedPage} />
+        <Chatbot />
       </div>
       <Footer />
     </div>
